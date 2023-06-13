@@ -28,15 +28,111 @@ Step 7: Save and run the application.
 
 ## PROGRAM:
 ```
+AndroidManifest.xml :
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools">
+<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+<uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
+<application
+android:allowBackup="true"
+android:dataExtractionRules="@xml/data_extraction_rules"
+android:fullBackupContent="@xml/backup_rules"
+android:icon="@mipmap/ic_launcher"
+android:label="@string/app_name"
+android:supportsRtl="true"
+android:theme="@style/Theme.ContentProviderForContacts"
+tools:targetApi="31">
+<activity
+android:name=".MainActivity"
+android:exported="true">
+<intent-filter>
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+</activity>
+</application>
+</manifest>
+activity_main.xml :
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayoutxmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button"
+android:layout_width="120dp"
+android:layout_height="54dp"
+android:background="#3F57DC"
+android:text="Get Contacts"
+android:onClick="btnGetContactPressed"
+android:textColor="#FAF1F1"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.498"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintVertical_bias="0.77" />
+</android.support.constraint.ConstraintLayout>
+MainActivity.java :
 /*
 Program to print the text create your own content providers to get contacts details.
-Developed by:
-Registeration Number :
+Developed by: N.SIDDARTHAN
+Registration Number: 212221040154
+*/
+package com.example.contentproviderforcontacts;
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.net.Uri;
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+    }
+    public void btnGetContactPressed(View v){
+getPhoneContacts();
+    }
+    private void getPhoneContacts(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+!=PackageManager.PERMISSION_GRANTED) {
+ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_CONTACTS},0);
+        }
+ContentResolvercontentResolver = getContentResolver();
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        Cursor cursor = contentResolver.query(uri, null,null,null,null);
+Log.i("CONTACT_PROVIDER_DEMO","TOTAL # of Contacts  :::  " + Integer.toString(cursor.getCount()));
+        if (cursor.getCount() > 0){
+            while (cursor.moveToNext()) {
+                String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                String contactNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+Log.i("CONTACT_PROVIDER_DEMO","ContactName  :::  " + "  Ph #  :::  " + contactNumber);
+            }
+        }
+    }
+}
+
+/*
+Program to print the text create your own content providers to get contacts details.
+Developed by: Srihariharan S A
+Registeration Number : 212221040160
 */
 ```
 
 ## OUTPUT
 
+![image](https://github.com/hariharan2383/Mobile-Application-Development/assets/117346668/54c139b6-70ad-4319-9a7e-30fdc4ee4e8c)
 
 
 
