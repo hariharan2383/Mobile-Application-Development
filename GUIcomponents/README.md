@@ -139,9 +139,6 @@ Registeration Number : 212221040160
 ```
 
 ## OUTPUT
-![Uploading WhatsApp Image 2023-06-06 at 12.04.18 PM (2).jpeg…]()
-
-
 
 
 ## RESULT
