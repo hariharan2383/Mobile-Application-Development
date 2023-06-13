@@ -15,6 +15,7 @@ Latest Version Android Studio
 
 ## PROGRAM:
 
+```
 activity_main.xml:
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayoutxmlns:android="http://schemas.android.com/apk/res/android"
@@ -130,7 +131,6 @@ ch = 1;
     }
 }
 
-```
 /*
 Program to print the text “GUIcomponent”.
 Developed by:
