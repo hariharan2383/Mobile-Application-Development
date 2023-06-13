@@ -133,8 +133,8 @@ ch = 1;
 
 /*
 Program to print the text “GUIcomponent”.
-Developed by:
-Registeration Number :
+Developed by: Srihariharan S A
+Registeration Number : 212221040160
 */
 ```
 
